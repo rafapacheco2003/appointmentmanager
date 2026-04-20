@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Environment (secrets: DB passwords, API keys)
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Runtime / build
+dist/
+build/
+coverage/
+
+# IDE (optional — quita esta sección si quieres versionar ajustes del equipo)
+.idea/
+.vscode/
+*.swp
+*.swo
