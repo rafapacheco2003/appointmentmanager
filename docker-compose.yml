@@ -1,19 +1,29 @@
 version: '3.8'
 
 services:
-  db:
-    image: mysql:8.0
-    container_name: appointment_db
+  app:
+    build: .
+    container_name: appointment-backend
     ports:
-      - "3306:3306"
+      - "3000:3000"
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: appointment_manager
-      MYSQL_USER: appuser
-      MYSQL_PASSWORD: apppassword
-    volumes:
-      - db_data:/var/lib/mysql
+      # Variables de tu base de datos en la nube (Render)
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      
+      # Variables de Supabase S3
+      - SUPABASE_BUCKET=${SUPABASE_BUCKET}
+      - SUPABASE_CDN_URL=${SUPABASE_CDN_URL}
+      - SUPABASE_S3_REGION=${SUPABASE_S3_REGION}
+      - SUPABASE_S3_ENDPOINT=${SUPABASE_S3_ENDPOINT}
+      - SUPABASE_ACCESS_KEY_ID=${SUPABASE_ACCESS_KEY_ID}
+      - SUPABASE_SECRET_ACCESS_KEY=${SUPABASE_SECRET_ACCESS_KEY}
+      
+      # Otras variables
+      - PORT=3000
     restart: unless-stopped
-
-volumes:
-  db_data:
+    env_file:
+      - .env

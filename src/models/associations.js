@@ -2,7 +2,9 @@ const User = require('./userModel');
 const Organization = require('./organizationModel');
 const Branch = require('./branchModel');
 const Plan = require('./planModel');
-const Subscription = require('./SuscriptionsModel');
+const Subscription = require('./suscriptionsModel');
+
+
 const OrganizationBranding = require('./organizationBrandingModel');
 
 User.hasMany(Organization, { foreignKey: 'ownerId', as: 'organizations' });

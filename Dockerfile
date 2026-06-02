@@ -1,19 +1,20 @@
-FROM node:14
+# Usar Node.js 20 LTS (más estable que 14)
+FROM node:20-alpine
 
-# Set the working directory
+# Establecer directorio de trabajo
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json
+# Copiar archivos de dependencias
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Instalar dependencias
+RUN npm ci --only=production
 
-# Copy the rest of the application files
+# Copiar el resto del código
 COPY . .
 
-# Expose the application port
+# Exponer el puerto
 EXPOSE 3000
 
-# Command to run the application
-CMD ["node", "src/app.js"]
+# Comando para iniciar la app
+CMD ["node", "src/index.js"]
