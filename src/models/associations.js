@@ -3,6 +3,7 @@ const Organization = require('./organizationModel');
 const Branch = require('./branchModel');
 const Plan = require('./planModel');
 const Subscription = require('./SuscriptionsModel');
+const OrganizationBranding = require('./organizationBrandingModel');
 
 User.hasMany(Organization, { foreignKey: 'ownerId', as: 'organizations' });
 Organization.belongsTo(User, { foreignKey: 'ownerId', as: 'owner' });
@@ -19,5 +20,7 @@ User.hasMany(Subscription, {foreignKey: 'userId', as: 'subscriptions' });
 Subscription.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 
 
+Organization.hasOne(OrganizationBranding, { foreignKey: 'organizationId', as: 'branding' });
+OrganizationBranding.belongsTo(Organization, { foreignKey: 'organizationId', as: 'organization' });
 
-module.exports = { User, Organization, Branch, Plan, Subscription };
+module.exports = { User, Organization, OrganizationBranding, Branch, Plan, Subscription };

@@ -4,6 +4,7 @@ const v1UserRoutes = require("./v1/routes/userRoutes");
 const v1OrganizationRoutes = require("./v1/routes/organizationRouter");
 const v1PlanRoutes = require("./v1/routes/planRoutes");
 const v1BranchRoutes = require("./v1/routes/branchRouter");
+const v1StorageRoutes = require("./v1/routes/storageRoutes");
 const sequelize = require("./databases/sequelize");
 require("./models/associations");
 
@@ -15,7 +16,7 @@ app.use("/api/v1/users", v1UserRoutes);
 app.use("/api/v1/organizations", v1OrganizationRoutes);
 app.use("/api/v1/plans", v1PlanRoutes);
 app.use("/api/v1/branches", v1BranchRoutes);
-
+app.use("/api/v1/storage", v1StorageRoutes);
 sequelize.sync({ force: false }) 
   .then(() => {
     console.log('Base de datos sincronizada');
