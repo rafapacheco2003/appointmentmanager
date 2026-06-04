@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const planController = require('../../modules/plan/controllers/planController');
-const validateRequest = require('../../modules/common/middlewares/validateRequest');
-const { createPlanSchema, updatePlanSchema } = require('../../modules/plan/schemas/planSchema');
+const planController = require('./planController');
+const validateRequest = require('../../middlewares/validateRequest');
+const { createPlanSchema, updatePlanSchema } = require('./planSchema');
 
 router
     .get('/', planController.getAllPlans)

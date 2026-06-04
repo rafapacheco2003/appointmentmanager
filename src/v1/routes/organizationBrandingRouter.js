@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const organizationBrandingController = require('../../controllers/organizationBrandingController');
-const validateRequest = require('../../middlewares/validateRequest');
-const { createOrganizationBrandingSchema } = require('../../schemas/organizationBrandingSchema');
+const organizationBrandingController = require('../../modules/organizationBranding/controllers/organizationBrandingController');
+const validateRequest = require('../../modules/common/middlewares/validateRequest');
+const { createOrganizationBrandingSchema } = require('../../modules/organizationBranding/schemas/organizationBrandingSchema');
 
 
 

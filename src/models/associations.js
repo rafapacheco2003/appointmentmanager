@@ -1,11 +1,9 @@
-const User = require('./userModel');
-const Organization = require('./organizationModel');
-const Branch = require('./branchModel');
-const Plan = require('./planModel');
-const Subscription = require('./suscriptionsModel');
-
-
-const OrganizationBranding = require('./organizationBrandingModel');
+const User = require('../modules/user/models/userModel');
+const Organization = require('../modules/organization/models/organizationModel');
+const Branch = require('../modules/branch/models/branchModel');
+const Plan = require('../modules/plan/models/planModel');
+const Subscription = require('../modules/subscription/models/subscriptionModel');
+const OrganizationBranding = require('../modules/organizationBranding/models/organizationBrandingModel');
 
 User.hasMany(Organization, { foreignKey: 'ownerId', as: 'organizations' });
 Organization.belongsTo(User, { foreignKey: 'ownerId', as: 'owner' });

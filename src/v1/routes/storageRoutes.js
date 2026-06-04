@@ -1,17 +1,7 @@
-const express =
-    require('express');
-
-const router =
-    express.Router();
-
-const upload =
-    require('../../middlewares/uploadMiddleware');
-
-const {
-    upload: uploadController
-} = require(
-    '../../controllers/storageController'
-);
+const express = require('express');
+const router = express.Router();
+const upload = require('../../modules/storage/middlewares/uploadMiddleware');
+const { upload: uploadController } = require('../../modules/storage/controllers/storageController');
 
 router.post(
     '/upload',
