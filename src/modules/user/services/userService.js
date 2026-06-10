@@ -18,7 +18,7 @@ const updateUser = async (id, userData) => {
         where: { id }
     });
     if (updated) {
-        return await User.findByPk(id);
+        return await getUserById(id);
     }
     return null;
 };

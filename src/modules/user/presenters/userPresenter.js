@@ -3,6 +3,7 @@ const presentUser = (user) => {
     
     return {
         id: user.id,
+        rol: user.rol,
         name: user.name,
         email: user.email
     };

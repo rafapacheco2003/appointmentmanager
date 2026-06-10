@@ -5,6 +5,7 @@ const Plan = require('../modules/plan/models/planModel');
 const Subscription = require('../modules/subscription/models/subscriptionModel');
 const OrganizationBranding = require('../modules/organizationBranding/models/organizationBrandingModel');
 
+
 User.hasMany(Organization, { foreignKey: 'ownerId', as: 'organizations' });
 Organization.belongsTo(User, { foreignKey: 'ownerId', as: 'owner' });
 
