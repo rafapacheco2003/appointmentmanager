@@ -1,4 +1,7 @@
 require('dotenv').config();
+
+const startSubscriptionExpirationJob =require('./jobs/subscriptionExpirationJob');
+
 const express = require("express");
 const v1UserRoutes = require("./v1/routes/userRoutes");
 const v1OrganizationRoutes = require("./v1/routes/organizationRouter");
@@ -14,6 +17,10 @@ require("./models/associations");
 const app = express();
 const port = process.env.PORT || 3000;
 
+
+
+
+
 app.use(express.json());
 app.use("/api/v1/users", v1UserRoutes);
 app.use("/api/v1/organizations", v1OrganizationRoutes);
@@ -23,6 +30,14 @@ app.use("/api/v1/organization-branding", v1OrganizationBrandingRoutes);
 app.use("/api/v1/subscriptions", v1SubscriptionRoutes);
 app.use("/api/v1/storage", v1StorageRoutes);
 app.use("/api/v1/roles", v1RolRoutes);
+
+
+
+
+
+startSubscriptionExpirationJob();
+
+
 sequelize.sync({ force: false, alter: true }) 
   .then(async () => {
     console.log('Base de datos sincronizada');

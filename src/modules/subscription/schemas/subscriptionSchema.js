@@ -3,10 +3,7 @@ const { z } = require('zod');
 const createSubscriptionSchema = z.object({
     userId: z.string().uuid(),
     planId: z.string().uuid(),
-    startDate: z.string(),
-    endDate: z.string(),
-    status: z.enum(['active', 'inactive', 'expired', 'cancelled']).optional(),
-    stripeSubscriptionId: z.string().nonempty()
+    stripeSubscriptionId: z.string().nonempty().optional()
 });
 
 const updateSubscriptionSchema = createSubscriptionSchema.partial();

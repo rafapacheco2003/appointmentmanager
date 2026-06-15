@@ -1,5 +1,7 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('../../../databases/sequelize');
+const SUBSCRIPTION_STATUS = require('../constants/subscriptionStatus');
+
 
 const Subscription = sequelize.define('Subscription', {
     id: {
@@ -18,15 +20,16 @@ const Subscription = sequelize.define('Subscription', {
     startDate:{
         type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: DataTypes.NOW
     },
     endDate:{
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: true
     },
     status:{
-        type: DataTypes.ENUM('active', 'inactive', 'expired', 'cancelled'),
+        type: DataTypes.ENUM(...Object.values(SUBSCRIPTION_STATUS)),
         allowNull: false,
-        defaultValue: 'active'
+        defaultValue: SUBSCRIPTION_STATUS.ACTIVE
     },
     stripeSubscriptionId:{
         type: DataTypes.STRING,
