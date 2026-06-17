@@ -1,34 +1,41 @@
+const sequelize = require('../../../databases/sequelize');
 const { createUserWithRole } = require('./registrationFactory');
-const { createSubscription } = require('../../subscription/services/subscriptionService');
 
-const register = async ({ role, subscription, ...userData }) => {
-    const user = await createUserWithRole(role, userData);
+const adminRegistration = require('../services/registrations/adminRegistration');
 
-    if (role === 'ADMIN') {
-        if (!subscription || !subscription.planId) {
-            throw new Error('Subscription data with planId is required for admin registration');
+
+const register = async (registration, data) => {
+
+    return sequelize.transaction(
+        async(transaction)=>{
+
+            const user = await createUserWithRole(
+                registration.role,
+                data,
+                transaction
+            );
+
+
+            return registration.afterCreate(
+                user,
+                data,
+                transaction
+            );
+
         }
+    );
 
-        const subscriptionCreated = await createSubscription({
-            ...subscription,
-            userId: user.id
-        });
-
-        return {
-            user,
-            subscription: subscriptionCreated
-        };
-    }
-
-    return { user };
 };
 
-const registerCustomer = async (registrationData) => register({ ...registrationData, role: 'CUSTOMER' });
-const registerAdmin = async (registrationData) => register({ ...registrationData, role: 'ADMIN' });
-const registerEmployee = async (registrationData) => register({ ...registrationData, role: 'EMPLOYEE' });
+
+const registerAdmin = async(data)=>{
+    return register(
+        adminRegistration,
+        data
+    );
+};
+
+
 module.exports = {
-    register,
-    registerCustomer,
-    registerAdmin,
-    registerEmployee
+    registerAdmin
 };

@@ -2,8 +2,7 @@ const { z } = require('zod');
 const { createSubscriptionSchema } = require('../../subscription/schemas/subscriptionSchema');
 
 const subscriptionSchema = createSubscriptionSchema.omit({
-  userId: true,
-  status: true
+  userId: true
 });
 
 const registerAdminSchema = z.object({

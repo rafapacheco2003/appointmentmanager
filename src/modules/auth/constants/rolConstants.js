@@ -1,23 +1,16 @@
-const { ROLE_VALUES } = require('../rol/models/role');
-
-const ROLES = {
+const ROLE_CONFIG = {
     ADMIN: {
-        name: 'admin',
-},
-    EMPLOYEE: {
-        name: 'employee',
+        requiresSubscription: true
     },
     CUSTOMER: {
-        name: 'customer',
+        requiresSubscription: false
+    },
+    EMPLOYEE: {
+        requiresSubscription: false
     },
     ROOT: {
-        name: 'root',
+        requiresSubscription: false
     }
 };
 
-
-const getRoleId = async (roleName, RolModel) => {
-    const rol = await RolModel.findOne({ where: { name: roleName } });
-    if (!rol) throw new Error(`Role ${roleName} not found`);
-    return rol.id;
-};
+module.exports = ROLE_CONFIG;

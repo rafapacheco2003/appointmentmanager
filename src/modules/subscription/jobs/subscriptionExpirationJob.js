@@ -1,8 +1,8 @@
 const cron = require('node-cron');
 const { Op } = require('sequelize');
 
-const Subscription = require('../modules/subscription/models/subscriptionModel');
-const SUBSCRIPTION_STATUS = require('../modules/subscription/constants/subscriptionStatus');
+const Subscription = require('../models/subscriptionModel');
+const SUBSCRIPTION_STATUS = require('../constants/subscriptionStatus');
 
 
 const startSubscriptionExpirationJob = () => {

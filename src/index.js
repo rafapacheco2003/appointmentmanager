@@ -1,6 +1,5 @@
 require('dotenv').config();
-
-const startSubscriptionExpirationJob =require('./jobs/subscriptionExpirationJob');
+const startSubscriptionExpirationJob = require('./modules/subscription/jobs/subscriptionExpirationJob');
 
 const express = require("express");
 const v1UserRoutes = require("./v1/routes/userRoutes");
@@ -11,6 +10,8 @@ const v1OrganizationBrandingRoutes = require("./v1/routes/organizationBrandingRo
 const v1SubscriptionRoutes = require("./v1/routes/subscriptionRoutes");
 const v1StorageRoutes = require("./v1/routes/storageRoutes");
 const v1RolRoutes = require("./v1/routes/rolRouter");
+const v1AuthRoutes = require("./v1/routes/authRouter");
+
 const sequelize = require("./databases/sequelize");
 require("./models/associations");
 
@@ -30,17 +31,20 @@ app.use("/api/v1/organization-branding", v1OrganizationBrandingRoutes);
 app.use("/api/v1/subscriptions", v1SubscriptionRoutes);
 app.use("/api/v1/storage", v1StorageRoutes);
 app.use("/api/v1/roles", v1RolRoutes);
+app.use("/api/v1/auth", v1AuthRoutes);
 
 
 
-
-
-startSubscriptionExpirationJob();
 
 
 sequelize.sync({ force: false, alter: true }) 
   .then(async () => {
     console.log('Base de datos sincronizada');
+
+
+
+startSubscriptionExpirationJob();
+
     app.listen(port, () => {
         console.log(` Servidor en puerto ${port}`);
     });
