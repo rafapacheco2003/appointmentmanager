@@ -1,7 +1,7 @@
 const {DataTypes} = require('sequelize')
 const sequelize = require('../../../databases/sequelize');
 
-const OrganizationBranding = sequelize.define('OrganizationBrading', {
+const OrganizationBranding = sequelize.define('OrganizationBranding', {
   id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,

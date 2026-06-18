@@ -1,15 +1,20 @@
-const { presentError } = require('../responsePresenter');
+const validateRequest = (schema) => (req, res, next) => {
 
-const validateRequest = (schema) => {
-    return (req, res, next) => {
-        try {
-            schema.parse(req.body); // Valida el body
-            next(); // Si pasa, continúa al controller
-        } catch (error) {
-            const message = error.errors?.[0]?.message ?? error.message;
-            res.status(400).json(presentError(message));
-        }
-    };
+    try {
+
+        schema.parse(req.body);
+
+        next();
+
+    } catch(error){
+
+        res.status(400).json({
+            error:error.message
+        });
+
+    }
+
 };
+
 
 module.exports = validateRequest;

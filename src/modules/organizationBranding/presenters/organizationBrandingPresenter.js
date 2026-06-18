@@ -1,3 +1,7 @@
+const {
+    normalizePublicStorageUrl
+} = require('../../storage/utils/buildPublicStorageUrl');
+
 const presentOrganizationBranding = (organizationBranding) => {
 
     if (!organizationBranding) {
@@ -7,13 +11,16 @@ const presentOrganizationBranding = (organizationBranding) => {
     return {
         id: organizationBranding.id,
         organizationId: organizationBranding.organizationId,
-        logoUrl: organizationBranding.logoUrl,
         primaryColor: organizationBranding.primaryColor,
         secondaryColor: organizationBranding.secondaryColor,
         accentColor: organizationBranding.accentColor,
         fontFamily: organizationBranding.fontFamily,
-        customLogo: organizationBranding.customLogo,
-        customIcon: organizationBranding.customIcon,
+        customLogo: normalizePublicStorageUrl(
+            organizationBranding.customLogo
+        ),
+        customIcon: normalizePublicStorageUrl(
+            organizationBranding.customIcon
+        ),
         customDomain: organizationBranding.customDomain,
         welcomeMessage: organizationBranding.welcomeMessage,
         footerText: organizationBranding.footerText,
