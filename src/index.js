@@ -1,5 +1,6 @@
 require('dotenv').config();
 const startSubscriptionExpirationJob = require('./modules/subscription/jobs/subscriptionExpirationJob');
+const ensureStorageBucket = require('./modules/storage/services/ensureStorageBucket');
 
 const express = require("express");
 const v1UserRoutes = require("./v1/routes/userRoutes");
@@ -41,9 +42,9 @@ sequelize.sync({ force: false, alter: true })
   .then(async () => {
     console.log('Base de datos sincronizada');
 
+    await ensureStorageBucket();
 
-
-startSubscriptionExpirationJob();
+    startSubscriptionExpirationJob();
 
     app.listen(port, () => {
         console.log(` Servidor en puerto ${port}`);
