@@ -3,7 +3,7 @@ require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 
-const s3 = require('./src/config/supabases3');
+const { s3 } = require('./src/config/storage');
 
 const {
     PutObjectCommand

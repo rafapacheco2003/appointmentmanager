@@ -9,7 +9,8 @@ const OrganizationBranding = sequelize.define('OrganizationBranding', {
     },
     organizationId: {
         type: DataTypes.UUID,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     primaryColor: {
         type: DataTypes.STRING,
@@ -63,10 +64,13 @@ const OrganizationBranding = sequelize.define('OrganizationBranding', {
 {
     tableName: 'organizationbrandings',
     timestamps: true,
-    underscored: true   
-}
+    underscored: true,
+    indexes: [
+        {
+            unique: true,
+            fields: ['organization_id']
+        }
+    ]
+});
 
-);
-
-
-module.exports=OrganizationBranding;
+module.exports = OrganizationBranding;

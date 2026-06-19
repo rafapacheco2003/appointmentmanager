@@ -1,6 +1,9 @@
 require('dotenv').config();
 const startSubscriptionExpirationJob = require('./modules/subscription/jobs/subscriptionExpirationJob');
-const ensureStorageBucket = require('./modules/storage/services/ensureStorageBucket');
+const {
+    uploadImage,
+    ensureStorageBucket
+} = require('./modules/storage/services/storageService');
 
 const express = require("express");
 const v1UserRoutes = require("./v1/routes/userRoutes");

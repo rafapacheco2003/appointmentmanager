@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const s3 = require('./src/config/supabases3');
+const { s3 } = require('./src/config/storage');
 
 const {
     ListBucketsCommand

@@ -1,4 +1,7 @@
 const organizationService = require('../services/organizationBrandingService');
+const {
+    OrganizationBrandingAlreadyExistsError
+} = organizationService;
 
 const {
     presentOrganizationBranding
@@ -14,12 +17,7 @@ const createOrganizationBranding = async(req, res) => {
 
     try {
 
-        console.log("BODY:", req.body);
-        console.log("FILES:", req.files);
-
-
-        const organizationId =
-            req.body.organizationId;
+        const organizationId = req.body.organizationId;
 
 
         let logoUrl = null;
@@ -80,16 +78,19 @@ const createOrganizationBranding = async(req, res) => {
             );
 
 
-    } catch(error){
+    } catch (error) {
+
+        if (error instanceof OrganizationBrandingAlreadyExistsError) {
+            return res.status(409).json({
+                error: error.message
+            });
+        }
 
         console.error(error);
 
-
-        return res.status(500)
-            .json({
-                error:error.message
-            });
-
+        return res.status(500).json({
+            error: error.message
+        });
     }
 
 };
