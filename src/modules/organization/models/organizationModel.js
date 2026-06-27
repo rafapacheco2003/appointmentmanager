@@ -1,4 +1,4 @@
-const {DataTypes} = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../../../databases/sequelize');
 
 const Organization = sequelize.define('Organization', {
@@ -36,20 +36,7 @@ const Organization = sequelize.define('Organization', {
     }
 }, {
     tableName: 'organizations',
-    timestamps: true,
-    hooks: {
-        beforeValidate: (organization) => {
-            if (organization.name && !organization.slug) {
-                // Generar slug desde el nombre
-                organization.slug = organization.name
-                    .toLowerCase()
-                    .trim()
-                    .replace(/[^\w\s-]/g, '') // Eliminar caracteres especiales
-                    .replace(/\s+/g, '-')      // Reemplazar espacios con guiones
-                    .replace(/-+/g, '-');      // Eliminar guiones duplicados
-            }
-        }
-    }
+    timestamps: true
 });
 
 module.exports = Organization;

@@ -6,9 +6,9 @@ const { createUserSchema, updateUserSchema } = require('../../modules/user/schem
 
 router
     .get('/', userController.getAllUsers)
-    .get('/:userId', userController.getUserById)
-    .post('/', validateRequest(createUserSchema), userController.createUser)
-    .put('/:userId', validateRequest(updateUserSchema), userController.updateUser)
-    .delete('/:userId', userController.deleteUser);
+    .get('/email/:email', userController.getUserByEmail)
+    .get('/phone/:phone', userController.getUserByPhone)
+    .get('/details/:id', userController.getUserDetails)
+    .get('/:userId', userController.getUserById);
 
 module.exports = router;

@@ -12,8 +12,13 @@ const presentUser = (user) => {
 const presentUsers = (users) => {
     return users.map(presentUser);
 };
+const presentUserDetails = (data) => ({
+    user: data.user,
+    subscription: data.subscription
+});
 
 module.exports = {
     presentUser,
-    presentUsers
+    presentUsers,
+    presentUserDetails
 };
